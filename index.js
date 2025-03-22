@@ -38,7 +38,7 @@ function NumberForm() {
 
 //Adds the number to the bank and triggers re-rendering
 function addNumber(number) {
-  number.Bank.push(number); //adds the number to the number bank
+  numberBank.push(number); //adds the number to the number bank
   render(); //re-renders the app to display updated number bank
 }
 
@@ -47,15 +47,15 @@ function NumberBank() {
   numberBank.forEach((number) => {
     const $li = document.createElement("li"); //create an <li> element for each number
     $li.textContent = number; //set the list items text content to the number
-    $bank.appendChild($li); //append the list item to the bank
+    $bank.appendChild($li); //a menthod that adds an element inside another element
   });
   return $bank;
 }
 
-//sort the first number from the number bank
+//sort the first number from the number bank. only move one number(thats why we dont need a loop)
 function sortFirst() {
-  const number = number.bankshift(); //remove the first number from the bank
-  if (n % 2 === 0) {
+  const number = numberBank.shift(); //remove the first number from the bank
+  if (number % 2 === 0) {
     evenNumbers.push(number); //add the number to the even if its divisible by 2
   } else {
     oddNumbers.push(number); //add the number to the odd if its not divisible by 2
@@ -63,9 +63,10 @@ function sortFirst() {
   render();
 }
 
-//sort all numbers from the nnumber bank
+//sort all numbers from the nnumber bank. while loop is best when you dont know how mnay times a loop needs to run
 function sortAll() {
   while (numberBank.length > 0) {
+    //loop stops when the bank is empty
     const number = numberBank.shift(); // remove the first number
     if (number % 2 === 0) {
       evenNumbers.push(number); //add to even numbers if even
@@ -74,4 +75,40 @@ function sortAll() {
     }
   }
   render();
+}
+
+function SortButtons() {
+  const $buttons = document.createElement("div");
+
+  const $sortFirstButton = document.createElement("button");
+  $sortFirstButton.textContent = "Sort 1"; //button to sort the first number
+  $sortFirstButton.addEventListener("click", sortFirst); //add click event to sort the first number
+
+  const $sortAllButton = document.createElement("button");
+  $sortAllButton.textContent = "Sort All"; //button to sort all numbers
+  $sortAllButton.addEventListener("click", sortAll); //add click event to sort all the numbers
+
+  $buttons.appendChild($sortFirstButton); //add "sort 1" button inside the div
+  $buttons.appendChild($sortAllButton); // add "sort all" button inside the div
+
+  return $buttons;
+}
+
+function OddNumbers() {
+  const $oddList = document.createEleemt("ul"); //create an unordered list for odd numbers
+  oddNumbers.forEach((number) => {
+    const $li = document.createElement("li");
+    $li.textContent = number;
+    $oddList.appendChild($li);
+  });
+  return $oddList;
+}
+
+function EvenNumbers() {
+  const $evenList = document.createElement("ul");
+  evenNumbers.forEach((number) => {
+    $li.textContent = number;
+    $evenList.appendChild($li);
+  });
+  return $evenList;
 }
