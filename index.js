@@ -95,20 +95,35 @@ function SortButtons() {
 }
 
 function OddNumbers() {
-  const $oddList = document.createEleemt("ul"); //create an unordered list for odd numbers
+  const $oddList = document.createElement("ul"); //create an unordered list for odd numbers
   oddNumbers.forEach((number) => {
-    const $li = document.createElement("li");
-    $li.textContent = number;
-    $oddList.appendChild($li);
+    //loop through each odd number in the oddNumbers array
+    const $li = document.createElement("li"); //create a list item for each number
+    $li.textContent = number; //set the list item's text content to the number
+    $oddList.appendChild($li); //add the list item to the unordered list
   });
-  return $oddList;
+  return $oddList; //return the unordered list  so it can be added to the page
 }
 
 function EvenNumbers() {
   const $evenList = document.createElement("ul");
   evenNumbers.forEach((number) => {
+    const $li = document.createElement("li");
     $li.textContent = number;
     $evenList.appendChild($li);
   });
   return $evenList;
 }
+
+// === Render ===
+
+function render() {
+  const $app = document.querySelector("#app");
+  $app.innerHTML = "";
+  $app.appendChild(NumberForm());
+  $app.appendChild(NumberBank());
+  $app.appendChild(SortButtons());
+  $app.appendChild(OddNumbers());
+  $app.appendChild(EvenNumbers());
+}
+render();
