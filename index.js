@@ -51,3 +51,27 @@ function NumberBank() {
   });
   return $bank;
 }
+
+//sort the first number from the number bank
+function sortFirst() {
+  const number = number.bankshift(); //remove the first number from the bank
+  if (n % 2 === 0) {
+    evenNumbers.push(number); //add the number to the even if its divisible by 2
+  } else {
+    oddNumbers.push(number); //add the number to the odd if its not divisible by 2
+  }
+  render();
+}
+
+//sort all numbers from the nnumber bank
+function sortAll() {
+  while (numberBank.length > 0) {
+    const number = numberBank.shift(); // remove the first number
+    if (number % 2 === 0) {
+      evenNumbers.push(number); //add to even numbers if even
+    } else {
+      oddNumbers.push(number); //add to odd numbers if odd
+    }
+  }
+  render();
+}
